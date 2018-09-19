@@ -1,0 +1,8 @@
+/prometheus/data/
+/grafana/
+/alertmanager/data/
+
+# Docker volumns
+/docker/prometheus/
+/docker/grafana/
+/docker/alertmanager/

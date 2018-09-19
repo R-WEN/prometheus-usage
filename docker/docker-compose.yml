@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  alertmanager:
+    image: prom/alertmanager
+    container_name: alertmanager
+    restart: always
+    volumes:
+      - ./alertmanager/data:/alertmanager
+      - ./alertmanager/conf/config.yml:/etc/alertmanager/config.yml
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    restart: always
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus/conf:/etc/prometheus
+      - ./prometheus/data:/prometheus
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    restart: always
+    depends_on:
+      - prometheus
+    ports:
+      - 3000:3000
+    volumes:
+      - ./grafana/data:/var/lib/grafana
